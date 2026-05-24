@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls \"c:/Users/user/Documents/portfoliov2\" && echo \"---\" && ls \"c:/Users/user/Documents/portfolio-new\")",
+      "Read(//c/Users/user/Documents/portfolio-new/**)"
+    ]
+  }
+}
