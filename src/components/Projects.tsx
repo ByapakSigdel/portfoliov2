@@ -85,6 +85,8 @@ export default function Projects() {
             key={p.title}
             className="brut flex flex-col"
             style={{ background: cardBg[i % 2] }}
+            data-explain={p.long}
+            data-explain-name={p.title}
           >
             <div className="border-b-2 border-line bg-panel px-3 py-1.5 flex items-center justify-between shrink-0">
                <div className="flex gap-1.5">

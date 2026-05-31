@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Press_Start_2P, JetBrains_Mono, Inter } from "next/font/google";
 import "./globals.css";
+import { CanvasProvider } from "@/canvas/CanvasContext";
 
 const pixel = Press_Start_2P({
   weight: "400",
@@ -29,7 +30,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${pixel.variable} ${mono.variable} ${sans.variable}`}>
-      <body>{children}</body>
+      <body>
+        <CanvasProvider>{children}</CanvasProvider>
+      </body>
     </html>
   );
 }

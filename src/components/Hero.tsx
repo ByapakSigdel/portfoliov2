@@ -2,6 +2,8 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { Draggable } from "@/canvas/Draggable";
+import { PIECES } from "@/canvas/types";
 
 const quotes = [
   "no matter how deep the night, it always turns to day.",
@@ -43,11 +45,12 @@ export default function Hero() {
     <section id="top" className="pt-4 sm:pt-8">
       <div className="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-6 md:gap-8 items-stretch">
         {/* Mascot card */}
+        <Draggable id={PIECES.HERO_MASCOT} className="md:h-full">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.4 }}
-          className="brut overflow-hidden flex items-end justify-center w-full md:w-56 relative"
+          className="brut overflow-hidden flex items-end justify-center w-full md:w-56 relative md:h-full"
           style={{ background: "#4a8f3d" }}
         >
           <div className="relative w-full flex items-end justify-center cursor-crosshair group mt-auto h-[240px] md:h-full">
@@ -57,17 +60,20 @@ export default function Hero() {
               fill
               priority
               sizes="(max-width: 768px) 100vw, 224px"
-              className="object-contain object-bottom origin-bottom group-hover:scale-[1.03] transition-transform duration-300 translate-y-1"
+              className="object-contain"
+              style={{ objectPosition: "bottom" }}
             />
           </div>
         </motion.div>
+        </Draggable>
 
         {/* Text card */}
+        <Draggable id={PIECES.HERO_TEXT} className="md:h-full">
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.4, delay: 0.1 }}
-          className="brut p-6 sm:p-8 flex flex-col justify-center"
+          className="brut p-6 sm:p-8 flex flex-col justify-center md:h-full"
           style={{ background: "#ffffff" }}
         >
           <div className="flex items-center gap-2 mb-4 flex-wrap">
@@ -138,6 +144,7 @@ export default function Hero() {
             </p>
           )}
         </motion.div>
+        </Draggable>
       </div>
     </section>
   );
