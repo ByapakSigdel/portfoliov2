@@ -1,15 +1,26 @@
 "use client";
 import { useEffect, useState } from "react";
+import {
+  MousePointer2,
+  Pencil,
+  Eraser,
+  Stamp,
+  StickyNote,
+  Undo2,
+  Redo2,
+  Trash2,
+  type LucideIcon,
+} from "lucide-react";
 import { useCanvas } from "./CanvasContext";
 import { PENCIL_COLORS, SpritePreview, SVG_SPRITES, PIXEL_SPRITES, IMAGE_SPRITES } from "./sprites";
 import { Tool } from "./types";
 
-const TOOLS: { key: Tool; label: string; hotkey: string; icon: string }[] = [
-  { key: "select", label: "select / move", hotkey: "V", icon: "⤢" },
-  { key: "pencil", label: "pencil", hotkey: "P", icon: "✎" },
-  { key: "eraser", label: "eraser", hotkey: "E", icon: "▦" },
-  { key: "stamp", label: "stamp", hotkey: "S", icon: "★" },
-  { key: "sticky", label: "sticky note", hotkey: "N", icon: "▤" },
+const TOOLS: { key: Tool; label: string; hotkey: string; Icon: LucideIcon }[] = [
+  { key: "select", label: "select & move", hotkey: "V", Icon: MousePointer2 },
+  { key: "pencil", label: "draw", hotkey: "P", Icon: Pencil },
+  { key: "eraser", label: "erase", hotkey: "E", Icon: Eraser },
+  { key: "stamp", label: "stickers", hotkey: "S", Icon: Stamp },
+  { key: "sticky", label: "sticky note", hotkey: "N", Icon: StickyNote },
 ];
 
 export function ToolPalette() {
@@ -23,19 +34,14 @@ export function ToolPalette() {
     setPencilSize,
     activeStamp,
     setActiveStamp,
-    snapToGrid,
-    setSnapToGrid,
     undo,
     redo,
     reset,
-    saveLayout,
-    shareUrl,
     eggBus,
   } = useCanvas();
 
   const [toast, setToast] = useState<string | null>(null);
 
-  // Global hotkeys
   useEffect(() => {
     if (!enabled) return;
     const onKey = (e: KeyboardEvent) => {
@@ -44,19 +50,16 @@ export function ToolPalette() {
       if (e.metaKey || e.ctrlKey) {
         if (e.key.toLowerCase() === "z" && !e.shiftKey) { e.preventDefault(); undo(); return; }
         if ((e.key.toLowerCase() === "z" && e.shiftKey) || e.key.toLowerCase() === "y") { e.preventDefault(); redo(); return; }
-        if (e.key.toLowerCase() === "s") { e.preventDefault(); saveLayout(); showToast("layout saved"); return; }
         return;
       }
       if (e.key === "Escape") { setTool("select"); return; }
-      const k = e.key.toLowerCase();
-      const found = TOOLS.find((t) => t.hotkey.toLowerCase() === k);
+      const found = TOOLS.find((t) => t.hotkey.toLowerCase() === e.key.toLowerCase());
       if (found) { e.preventDefault(); setTool(found.key); }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [enabled, undo, redo, saveLayout, setTool]);
+  }, [enabled, undo, redo, setTool]);
 
-  // toast egg events
   useEffect(() => {
     return eggBus.subscribe((ev) => {
       if (ev.type === "toast") showToast(ev.msg);
@@ -71,106 +74,87 @@ export function ToolPalette() {
 
   if (!enabled) return null;
 
+  const activeLabel = TOOLS.find((t) => t.key === tool)?.label ?? tool;
   const hasFlyout = tool === "pencil" || tool === "stamp";
 
   return (
     <>
-      {/* Left-center vertical toolbar */}
       <div
         style={{
           position: "fixed",
-          left: 12,
+          left: 14,
           top: "50%",
           transform: "translateY(-50%)",
           zIndex: 100,
           display: "flex",
-          alignItems: "center",
-          gap: 8,
+          alignItems: "flex-start",
+          gap: 10,
         }}
       >
-        <div
-          className="brut"
-          style={{
-            background: "#f3e8cf",
-            padding: 6,
-            display: "flex",
-            flexDirection: "column",
-            gap: 6,
-          }}
-        >
-          {TOOLS.map((t) => (
-            <button
-              key={t.key}
-              onClick={() => setTool(t.key)}
-              title={`${t.label} (${t.hotkey})`}
-              className="brut-sm brut-press"
-              style={toolBtn(tool === t.key)}
-            >
-              {t.icon}
-            </button>
-          ))}
-
-          <span style={{ height: 2, background: "#07090a", margin: "2px 0" }} />
-
-          <button onClick={undo} title="undo (⌘Z)" className="brut-sm brut-press" style={utilBtn()}>↶</button>
-          <button onClick={redo} title="redo (⌘⇧Z)" className="brut-sm brut-press" style={utilBtn()}>↷</button>
-          <button
-            onClick={() => setSnapToGrid(!snapToGrid)}
-            title={`snap to grid: ${snapToGrid ? "on" : "off"}`}
-            className="brut-sm brut-press"
-            style={utilBtn(snapToGrid)}
-          >
-            #
-          </button>
-          <button
-            onClick={() => { saveLayout(); showToast("layout saved"); }}
-            title="save layout (⌘S)"
-            className="brut-sm brut-press"
-            style={utilBtn()}
-          >
-            ⤓
-          </button>
-          <button
-            onClick={async () => {
-              const url = shareUrl();
-              try {
-                await navigator.clipboard.writeText(url);
-                showToast("share link copied");
-              } catch {
-                prompt("share link", url);
-              }
-            }}
-            title="copy share link"
-            className="brut-sm brut-press"
-            style={utilBtn()}
-          >
-            ↗
-          </button>
-          <button
-            onClick={() => { if (confirm("reset layout & drawings?")) { reset(); showToast("reset"); } }}
-            title="reset everything"
-            className="brut-sm brut-press"
-            style={{ ...utilBtn(), background: "#b04a18", color: "#fff" }}
-          >
-            ⟲
-          </button>
-        </div>
-
-        {/* Flyout: pencil colors / stamp picker */}
-        {hasFlyout && (
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
           <div
             className="brut"
             style={{
-              background: "#ffffff",
-              padding: 10,
-              maxWidth: 220,
-              maxHeight: "70vh",
-              overflowY: "auto",
+              background: "#f3e8cf",
+              padding: 7,
+              display: "flex",
+              flexDirection: "column",
+              gap: 5,
             }}
+          >
+            {TOOLS.map((t) => (
+              <Btn
+                key={t.key}
+                title={`${t.label} · ${t.hotkey}`}
+                active={tool === t.key}
+                onClick={() => setTool(t.key)}
+              >
+                <t.Icon size={19} strokeWidth={2.25} />
+              </Btn>
+            ))}
+
+            <span style={{ height: 2, background: "#07090a", margin: "3px 2px", opacity: 0.85 }} />
+
+            <Btn title="undo · ⌘Z" onClick={undo}>
+              <Undo2 size={18} strokeWidth={2.25} />
+            </Btn>
+            <Btn title="redo · ⌘⇧Z" onClick={redo}>
+              <Redo2 size={18} strokeWidth={2.25} />
+            </Btn>
+            <Btn
+              title="clear everything"
+              danger
+              onClick={() => { if (confirm("clear all drawings, stamps & notes?")) { reset(); showToast("cleared"); } }}
+            >
+              <Trash2 size={18} strokeWidth={2.25} />
+            </Btn>
+          </div>
+
+          {/* current tool caption — keeps it obvious what's selected */}
+          <span
+            style={{
+              fontFamily: "var(--font-pixel), monospace",
+              fontSize: 8,
+              color: "#07090a",
+              background: "#fff",
+              border: "2px solid #07090a",
+              padding: "3px 6px",
+              whiteSpace: "nowrap",
+            }}
+          >
+            {activeLabel}
+          </span>
+        </div>
+
+        {/* Flyout: draw colours / sticker picker */}
+        {hasFlyout && (
+          <div
+            className="brut"
+            style={{ background: "#ffffff", padding: 10, maxWidth: 220, maxHeight: "70vh", overflowY: "auto" }}
           >
             {tool === "pencil" && (
               <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                <div style={{ fontFamily: "var(--font-pixel)", fontSize: 9 }}>color</div>
+                <Heading>colour</Heading>
                 <div style={{ display: "flex", gap: 5, flexWrap: "wrap" }}>
                   {PENCIL_COLORS.map((c) => (
                     <button
@@ -189,7 +173,7 @@ export function ToolPalette() {
                     />
                   ))}
                 </div>
-                <div style={{ fontFamily: "var(--font-pixel)", fontSize: 9, marginTop: 4 }}>size</div>
+                <Heading>size</Heading>
                 <div style={{ display: "flex", gap: 5 }}>
                   {[2, 3, 5, 8].map((s) => (
                     <button
@@ -215,13 +199,13 @@ export function ToolPalette() {
 
             {tool === "stamp" && (
               <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                <div style={{ fontFamily: "var(--font-pixel)", fontSize: 9 }}>naruto</div>
+                <Heading>naruto</Heading>
                 <div style={{ display: "flex", gap: 5, flexWrap: "wrap" }}>
                   {[...IMAGE_SPRITES, ...PIXEL_SPRITES].map((s) => (
                     <StampButton key={s.key} k={s.key} label={s.label} active={activeStamp === s.key} onClick={() => setActiveStamp(s.key)} />
                   ))}
                 </div>
-                <div style={{ fontFamily: "var(--font-pixel)", fontSize: 9, marginTop: 4 }}>pixels</div>
+                <Heading>pixels</Heading>
                 <div style={{ display: "flex", gap: 5, flexWrap: "wrap" }}>
                   {SVG_SPRITES.map((s) => (
                     <StampButton key={s.key} k={s.key} label={s.label} active={activeStamp === s.key} onClick={() => setActiveStamp(s.key)} />
@@ -231,25 +215,6 @@ export function ToolPalette() {
             )}
           </div>
         )}
-      </div>
-
-      {/* hint label (first impression) */}
-      <div
-        style={{
-          position: "fixed",
-          left: 12,
-          bottom: 12,
-          zIndex: 90,
-          fontFamily: "var(--font-mono), monospace",
-          fontSize: 11,
-          color: "#1a1a14",
-          background: "rgba(243,232,207,0.85)",
-          border: "2px solid #07090a",
-          padding: "4px 8px",
-          pointerEvents: "none",
-        }}
-      >
-        canvas: drag pieces · draw · stamp · {tool}
       </div>
 
       {toast && (
@@ -277,6 +242,48 @@ export function ToolPalette() {
   );
 }
 
+function Btn({
+  children,
+  title,
+  active,
+  danger,
+  onClick,
+}: {
+  children: React.ReactNode;
+  title: string;
+  active?: boolean;
+  danger?: boolean;
+  onClick: () => void;
+}) {
+  const bg = active ? "#4a8f3d" : danger ? "#fff" : "#fff";
+  const fg = active ? "#fff" : danger ? "#b04a18" : "#07090a";
+  return (
+    <button
+      onClick={onClick}
+      title={title}
+      className="brut-press"
+      style={{
+        width: 40,
+        height: 40,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        background: bg,
+        color: fg,
+        border: "2px solid #07090a",
+        cursor: "pointer",
+        padding: 0,
+      }}
+    >
+      {children}
+    </button>
+  );
+}
+
+function Heading({ children }: { children: React.ReactNode }) {
+  return <div style={{ fontFamily: "var(--font-pixel)", fontSize: 9 }}>{children}</div>;
+}
+
 function StampButton({ k, label, active, onClick }: { k: string; label: string; active: boolean; onClick: () => void }) {
   return (
     <button
@@ -298,30 +305,4 @@ function StampButton({ k, label, active, onClick }: { k: string; label: string; 
       <SpritePreview k={k} />
     </button>
   );
-}
-
-function toolBtn(active: boolean): React.CSSProperties {
-  return {
-    width: 40,
-    height: 40,
-    background: active ? "#4a8f3d" : "#ffffff",
-    color: active ? "#ffffff" : "#07090a",
-    fontFamily: "var(--font-pixel), monospace",
-    fontSize: 15,
-    cursor: "pointer",
-    lineHeight: 1,
-  };
-}
-
-function utilBtn(active = false): React.CSSProperties {
-  return {
-    width: 40,
-    height: 30,
-    background: active ? "#4a8f3d" : "#ffffff",
-    color: active ? "#ffffff" : "#07090a",
-    fontFamily: "var(--font-pixel), monospace",
-    fontSize: 13,
-    cursor: "pointer",
-    lineHeight: 1,
-  };
 }

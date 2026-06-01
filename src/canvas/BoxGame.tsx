@@ -25,7 +25,7 @@ function perimeterPoint(r: Rect, t: number) {
 let eggSeq = 0;
 
 export function BoxGame() {
-  const { enabled } = useCanvas();
+  const { enabled, eggBus } = useCanvas();
   const boxRef = useRef<HTMLDivElement>(null);
   const badgeRef = useRef<HTMLDivElement>(null);
   const rectRef = useRef<Rect | null>(null);
@@ -96,6 +96,10 @@ export function BoxGame() {
     if (!aliveRef.current) return;
     aliveRef.current = false;
     setScore((s) => s + 1);
+    // loot tumbles out of every smashed crate — sometimes food, sometimes junk.
+    // crate position is in page coords; hand viewport coords (loot is fixed-pos).
+    const c = boxCenter.current;
+    eggBus.emit({ type: "loot", x: c.x - window.scrollX, y: c.y - window.scrollY });
     let f = 2;
     const step = () => {
       setFrame(f);

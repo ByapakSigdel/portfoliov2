@@ -8,10 +8,16 @@ import Nav from "@/components/Nav";
 import EasterEggs from "@/components/EasterEggs";
 import Marquee from "@/components/Marquee";
 import { Draggable } from "@/canvas/Draggable";
+import { ColoringBook } from "@/canvas/ColoringBook";
 import { CanvasLayer } from "@/canvas/CanvasLayer";
 import { ToolPalette } from "@/canvas/ToolPalette";
 import { AnimatedNinja } from "@/canvas/AnimatedNinja";
+import { NarutoScene } from "@/canvas/NarutoScene";
 import { BoxGame } from "@/canvas/BoxGame";
+import { PokeZone } from "@/canvas/PokeBall";
+import { PokeDecor } from "@/canvas/PokeDecor";
+import { PokeLoot } from "@/canvas/PokeLoot";
+import { SnakeGame } from "@/canvas/SnakeGame";
 import { SectionExplainer } from "@/canvas/SectionExplainer";
 import { PIECES } from "@/canvas/types";
 
@@ -38,23 +44,32 @@ export default function Home() {
           </Section>
         </Draggable>
         <Draggable id={PIECES.WRITING}>
-          <Section id="writing" eyebrow="03" title="writing" bg="#e8a87c"
+          <Section id="writing" eyebrow="03" title="writing" bg="#e8a87c" snakeBar
             explain="Notes and articles I've written — things I figured out and wanted to keep.">
             <Articles />
           </Section>
         </Draggable>
-        <Draggable id={PIECES.TASTE}>
-          <Section id="taste" eyebrow="04" title="taste" bg="#5fa052"
-            explain="The music, media and ideas that shape how I think and build.">
-            <Recommendations />
-          </Section>
-        </Draggable>
+        <div className="relative">
+          {/* original paintings in the gutters; drawing grids hide behind the section */}
+          <ColoringBook revealPieceId={PIECES.TASTE} />
+          <Draggable id={PIECES.TASTE}>
+            <Section id="taste" eyebrow="04" title="taste" bg="#5fa052"
+              explain="The music, media and ideas that shape how I think and build.">
+              <Recommendations />
+            </Section>
+          </Draggable>
+        </div>
         <Draggable id={PIECES.FOOTER}>
           <Footer />
         </Draggable>
       </div>
       <AnimatedNinja />
+      <NarutoScene />
       <BoxGame />
+      <PokeDecor />
+      <PokeZone />
+      <PokeLoot />
+      <SnakeGame />
       <SectionExplainer />
       <CanvasLayer />
       <ToolPalette />
@@ -68,6 +83,7 @@ function Section({
   title,
   bg,
   explain,
+  snakeBar,
   children,
 }: {
   id: string;
@@ -75,6 +91,7 @@ function Section({
   title: string;
   bg: string;
   explain?: string;
+  snakeBar?: boolean;
   children: React.ReactNode;
 }) {
   return (
@@ -92,7 +109,7 @@ function Section({
           #{eyebrow}
         </span>
         <h2 className="font-pixel text-lg sm:text-2xl lowercase text-ink">{title}</h2>
-        <span className="flex-1 h-[3px] bg-line" />
+        <span className="flex-1 h-[3px] bg-line relative" {...(snakeBar ? { "data-snake-bar": "" } : {})} />
       </div>
       {children}
     </section>

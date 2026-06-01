@@ -43,7 +43,9 @@ type EggEvent =
   | { type: "stop"; x: number; y: number }
   | { type: "explain"; name: string; text: string }
   | { type: "toast"; msg: string }
-  | { type: "sparkle"; x: number; y: number };
+  | { type: "sparkle"; x: number; y: number }
+  | { type: "loot"; x: number; y: number } // crate smashed → drop a random item here
+  | { type: "feed"; id: string }; // feed (and evolve) the pokémon with this id
 
 type Ctx = {
   enabled: boolean;
@@ -80,6 +82,7 @@ type Ctx = {
 
   eggBus: {
     subscribe: (fn: (e: EggEvent) => void) => () => void;
+    emit: (e: EggEvent) => void;
   };
   pieceIds: string[];
 };
@@ -426,8 +429,9 @@ export function CanvasProvider({ children }: { children: React.ReactNode }) {
         subscribers.current.add(fn);
         return () => subscribers.current.delete(fn) as unknown as void;
       },
+      emit,
     }),
-    []
+    [emit]
   );
 
   const value: Ctx = {
