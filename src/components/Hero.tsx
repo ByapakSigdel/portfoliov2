@@ -100,11 +100,11 @@ export default function Hero() {
 
           <div className="mt-5 flex flex-wrap gap-2">
             <a
-              href="mailto:sigdelmb123@gmail.com"
+              href="mailto:mail@mahansigdel.com.np"
               className="tag-pixel brut-hover-sm"
               style={{ background: "#ffffff" }}
             >
-              ✉ mail
+              mail@mahansigdel.com.np
             </a>
             <a
               href="https://www.linkedin.com/in/mahansigdel"
@@ -114,24 +114,6 @@ export default function Hero() {
               style={{ background: "#f0b388" }}
             >
               in/ linkedin
-            </a>
-            <a
-              href="https://github.com/ByapakSigdel"
-              target="_blank"
-              rel="noreferrer"
-              className="tag-pixel brut-hover-sm"
-              style={{ background: "#ffffff" }}
-            >
-              @ github
-            </a>
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noreferrer"
-              className="tag-pixel brut-hover-sm"
-              style={{ background: "#0a0d0a", color: "#f5ecd7" }}
-            >
-              ↓ resume.pdf
             </a>
           </div>
 

@@ -89,9 +89,12 @@ export function ToolPalette() {
           display: "flex",
           alignItems: "flex-start",
           gap: 10,
+          // let pointer events through the container's transparent margins so you
+          // can still draw "behind" the palette; only the panel + flyout capture them
+          pointerEvents: "none",
         }}
       >
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6, pointerEvents: "none" }}>
           <div
             className="brut"
             style={{
@@ -100,6 +103,7 @@ export function ToolPalette() {
               display: "flex",
               flexDirection: "column",
               gap: 5,
+              pointerEvents: "auto",
             }}
           >
             {TOOLS.map((t) => (
@@ -150,7 +154,7 @@ export function ToolPalette() {
         {hasFlyout && (
           <div
             className="brut"
-            style={{ background: "#ffffff", padding: 10, maxWidth: 220, maxHeight: "70vh", overflowY: "auto" }}
+            style={{ background: "#ffffff", padding: 10, maxWidth: 220, maxHeight: "70vh", overflowY: "auto", pointerEvents: "auto" }}
           >
             {tool === "pencil" && (
               <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
@@ -233,6 +237,7 @@ export function ToolPalette() {
             border: "2px solid #07090a",
             boxShadow: "4px 4px 0 0 #4a8f3d",
             zIndex: 200,
+            pointerEvents: "none",
           }}
         >
           {toast}

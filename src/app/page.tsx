@@ -6,7 +6,7 @@ import NowPlaying from "@/components/NowPlaying";
 import Footer from "@/components/Footer";
 import Nav from "@/components/Nav";
 import EasterEggs from "@/components/EasterEggs";
-import Marquee from "@/components/Marquee";
+import Asteroids from "@/components/Asteroids";
 import { Draggable } from "@/canvas/Draggable";
 import { ColoringBook } from "@/canvas/ColoringBook";
 import { CanvasLayer } from "@/canvas/CanvasLayer";
@@ -29,7 +29,7 @@ export default function Home() {
       <div className="mx-auto w-full max-w-5xl px-5 sm:px-8 pt-24 pb-32">
         <Hero />
         <Draggable id={PIECES.MARQUEE}>
-          <Marquee />
+          <Asteroids />
         </Draggable>
         <Draggable id={PIECES.NOW}>
           <Section id="now" eyebrow="01" title="now" bg="#5fa052"

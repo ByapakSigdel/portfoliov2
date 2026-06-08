@@ -6,22 +6,29 @@ const articles = [
     title: "Troubleshooting TTY1 issue & Creating a Bootable Drive",
     description: "deep dive into terminal interface debugging.",
     link: "https://blog.mahansigdel.com.np/troubleshooting-tty1-issue-and-creating-a-bootable-drive",
-    date: "2024",
+    date: "Aug 2024",
     bg: "#5fa052",
   },
   {
     title: "Remote Access for Linux from your Android/iOS",
     description: "step-by-step guide to reliable remote access setup.",
     link: "https://blog.mahansigdel.com.np/remote-access-for-linux",
-    date: "2024",
+    date: "Jul 2024",
     bg: "#e08043",
   },
   {
     title: "Just me, Python and a Discord bot that wouldn't listen",
     description: "a personal story and debugging journey.",
     link: "https://blog.mahansigdel.com.np/just-me-python-and-a-discord-bot-that-wouldnt-listen",
-    date: "2024",
+    date: "Nov 2025",
     bg: "#e8a87c",
+  },
+  {
+    title: "Is Visual Scripting Really That Easy?",
+    description: "wiring up an esp32 iot rig as a freshman — and why block coding clicked.",
+    link: "https://blog.mahansigdel.com.np/is-visual-scripting-really-that-easy",
+    date: "May 2026",
+    bg: "#fffaf0",
   },
 ];
 

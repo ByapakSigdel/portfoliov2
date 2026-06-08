@@ -1,0 +1,512 @@
+{
+  "user": "byapak",
+  "source": "https://letterboxd.com/byapak/films/",
+  "updated": "2026-06-02",
+  "count": 72,
+  "films": [
+    {
+      "title": "Eternal Sunshine of the Spotless Mind",
+      "year": 2004,
+      "slug": "eternal-sunshine-of-the-spotless-mind",
+      "url": "https://letterboxd.com/film/eternal-sunshine-of-the-spotless-mind/",
+      "rating": 10
+    },
+    {
+      "title": "Interstellar",
+      "year": 2014,
+      "slug": "interstellar",
+      "url": "https://letterboxd.com/film/interstellar/",
+      "rating": 10
+    },
+    {
+      "title": "Project Hail Mary",
+      "year": 2026,
+      "slug": "project-hail-mary",
+      "url": "https://letterboxd.com/film/project-hail-mary/",
+      "rating": 10
+    },
+    {
+      "title": "Superboys of Malegaon",
+      "year": 2024,
+      "slug": "superboys-of-malegaon",
+      "url": "https://letterboxd.com/film/superboys-of-malegaon/",
+      "rating": 10
+    },
+    {
+      "title": "F1",
+      "year": 2025,
+      "slug": "f1",
+      "url": "https://letterboxd.com/film/f1/",
+      "rating": 9
+    },
+    {
+      "title": "Meet the Robinsons",
+      "year": 2007,
+      "slug": "meet-the-robinsons",
+      "url": "https://letterboxd.com/film/meet-the-robinsons/",
+      "rating": 9
+    },
+    {
+      "title": "Unko Sweater",
+      "year": 2025,
+      "slug": "unko-sweater",
+      "url": "https://letterboxd.com/film/unko-sweater/",
+      "rating": 9
+    },
+    {
+      "title": "Vanilla Sky",
+      "year": 2001,
+      "slug": "vanilla-sky",
+      "url": "https://letterboxd.com/film/vanilla-sky/",
+      "rating": 9
+    },
+    {
+      "title": "Whiplash",
+      "year": 2014,
+      "slug": "whiplash-2014",
+      "url": "https://letterboxd.com/film/whiplash-2014/",
+      "rating": 9
+    },
+    {
+      "title": "Avatar",
+      "year": 2009,
+      "slug": "avatar",
+      "url": "https://letterboxd.com/film/avatar/",
+      "rating": 8
+    },
+    {
+      "title": "Gen V - Prime Premiere",
+      "year": 2023,
+      "slug": "gen-v-prime-premiere",
+      "url": "https://letterboxd.com/film/gen-v-prime-premiere/",
+      "rating": 8
+    },
+    {
+      "title": "How to Train Your Dragon",
+      "year": 2025,
+      "slug": "how-to-train-your-dragon-2025",
+      "url": "https://letterboxd.com/film/how-to-train-your-dragon-2025/",
+      "rating": 8
+    },
+    {
+      "title": "Jolly LLB",
+      "year": 2013,
+      "slug": "jolly-llb",
+      "url": "https://letterboxd.com/film/jolly-llb/",
+      "rating": 8
+    },
+    {
+      "title": "Kill Bill: Vol. 2",
+      "year": 2004,
+      "slug": "kill-bill-vol-2",
+      "url": "https://letterboxd.com/film/kill-bill-vol-2/",
+      "rating": 8
+    },
+    {
+      "title": "Magnolia",
+      "year": 1999,
+      "slug": "magnolia",
+      "url": "https://letterboxd.com/film/magnolia/",
+      "rating": 8
+    },
+    {
+      "title": "Marty Supreme",
+      "year": 2025,
+      "slug": "marty-supreme",
+      "url": "https://letterboxd.com/film/marty-supreme/",
+      "rating": 8
+    },
+    {
+      "title": "Metro... In Dino",
+      "year": 2025,
+      "slug": "metro-in-dino",
+      "url": "https://letterboxd.com/film/metro-in-dino/",
+      "rating": 8
+    },
+    {
+      "title": "Mission: Impossible – The Final Reckoning",
+      "year": 2025,
+      "slug": "mission-impossible-the-final-reckoning",
+      "url": "https://letterboxd.com/film/mission-impossible-the-final-reckoning/",
+      "rating": 8
+    },
+    {
+      "title": "Parasite",
+      "year": 2019,
+      "slug": "parasite-2019",
+      "url": "https://letterboxd.com/film/parasite-2019/",
+      "rating": 8
+    },
+    {
+      "title": "Past Lives",
+      "year": 2023,
+      "slug": "past-lives",
+      "url": "https://letterboxd.com/film/past-lives/",
+      "rating": 8
+    },
+    {
+      "title": "Perfect Days",
+      "year": 2023,
+      "slug": "perfect-days-2023",
+      "url": "https://letterboxd.com/film/perfect-days-2023/",
+      "rating": 8
+    },
+    {
+      "title": "Sinners",
+      "year": 2025,
+      "slug": "sinners-2025",
+      "url": "https://letterboxd.com/film/sinners-2025/",
+      "rating": 8
+    },
+    {
+      "title": "Sir",
+      "year": 2018,
+      "slug": "sir-2018",
+      "url": "https://letterboxd.com/film/sir-2018/",
+      "rating": 8
+    },
+    {
+      "title": "The Lunchbox",
+      "year": 2013,
+      "slug": "the-lunchbox",
+      "url": "https://letterboxd.com/film/the-lunchbox/",
+      "rating": 8
+    },
+    {
+      "title": "Wake Up Dead Man",
+      "year": 2025,
+      "slug": "wake-up-dead-man",
+      "url": "https://letterboxd.com/film/wake-up-dead-man/",
+      "rating": 8
+    },
+    {
+      "title": "War Dogs",
+      "year": 2016,
+      "slug": "war-dogs-2016",
+      "url": "https://letterboxd.com/film/war-dogs-2016/",
+      "rating": 8
+    },
+    {
+      "title": "When Life Gives You Tangerines",
+      "year": 2025,
+      "slug": "when-life-gives-you-tangerines-2025",
+      "url": "https://letterboxd.com/film/when-life-gives-you-tangerines-2025/",
+      "rating": 8
+    },
+    {
+      "title": "Cocktail",
+      "year": 2012,
+      "slug": "cocktail-2012",
+      "url": "https://letterboxd.com/film/cocktail-2012/",
+      "rating": 7
+    },
+    {
+      "title": "How to Lose a Guy in 10 Days",
+      "year": 2003,
+      "slug": "how-to-lose-a-guy-in-10-days",
+      "url": "https://letterboxd.com/film/how-to-lose-a-guy-in-10-days/",
+      "rating": 7
+    },
+    {
+      "title": "Kill Bill: Vol. 1",
+      "year": 2003,
+      "slug": "kill-bill-vol-1",
+      "url": "https://letterboxd.com/film/kill-bill-vol-1/",
+      "rating": 7
+    },
+    {
+      "title": "Michael",
+      "year": 2026,
+      "slug": "michael-2026",
+      "url": "https://letterboxd.com/film/michael-2026/",
+      "rating": 7
+    },
+    {
+      "title": "No Smoking",
+      "year": 2007,
+      "slug": "no-smoking-2007",
+      "url": "https://letterboxd.com/film/no-smoking-2007/",
+      "rating": 7
+    },
+    {
+      "title": "One Battle After Another",
+      "year": 2025,
+      "slug": "one-battle-after-another",
+      "url": "https://letterboxd.com/film/one-battle-after-another/",
+      "rating": 7
+    },
+    {
+      "title": "The Fantastic 4: First Steps",
+      "year": 2025,
+      "slug": "the-fantastic-4-first-steps",
+      "url": "https://letterboxd.com/film/the-fantastic-4-first-steps/",
+      "rating": 7
+    },
+    {
+      "title": "The Substance",
+      "year": 2024,
+      "slug": "the-substance",
+      "url": "https://letterboxd.com/film/the-substance/",
+      "rating": 7
+    },
+    {
+      "title": "Thunderbolts*",
+      "year": 2025,
+      "slug": "thunderbolts",
+      "url": "https://letterboxd.com/film/thunderbolts/",
+      "rating": 7
+    },
+    {
+      "title": "We Live in Time",
+      "year": 2024,
+      "slug": "we-live-in-time",
+      "url": "https://letterboxd.com/film/we-live-in-time/",
+      "rating": 7
+    },
+    {
+      "title": "Zootopia",
+      "year": 2016,
+      "slug": "zootopia",
+      "url": "https://letterboxd.com/film/zootopia/",
+      "rating": 7
+    },
+    {
+      "title": "Aavesham",
+      "year": 2024,
+      "slug": "aavesham-2024",
+      "url": "https://letterboxd.com/film/aavesham-2024/",
+      "rating": 6
+    },
+    {
+      "title": "Carry-On",
+      "year": 2024,
+      "slug": "carry-on-2024",
+      "url": "https://letterboxd.com/film/carry-on-2024/",
+      "rating": 6
+    },
+    {
+      "title": "Challengers",
+      "year": 2024,
+      "slug": "challengers",
+      "url": "https://letterboxd.com/film/challengers/",
+      "rating": 6
+    },
+    {
+      "title": "Dev.D",
+      "year": 2009,
+      "slug": "devd",
+      "url": "https://letterboxd.com/film/devd/",
+      "rating": 6
+    },
+    {
+      "title": "Dhurandhar",
+      "year": 2025,
+      "slug": "dhurandhar",
+      "url": "https://letterboxd.com/film/dhurandhar/",
+      "rating": 6
+    },
+    {
+      "title": "Final Destination Bloodlines",
+      "year": 2025,
+      "slug": "final-destination-bloodlines",
+      "url": "https://letterboxd.com/film/final-destination-bloodlines/",
+      "rating": 6
+    },
+    {
+      "title": "Garam Masala",
+      "year": 2005,
+      "slug": "garam-masala",
+      "url": "https://letterboxd.com/film/garam-masala/",
+      "rating": 6
+    },
+    {
+      "title": "Jolly LLB 2",
+      "year": 2017,
+      "slug": "jolly-llb-2",
+      "url": "https://letterboxd.com/film/jolly-llb-2/",
+      "rating": 6
+    },
+    {
+      "title": "Now You See Me 2",
+      "year": 2016,
+      "slug": "now-you-see-me-2",
+      "url": "https://letterboxd.com/film/now-you-see-me-2/",
+      "rating": 6
+    },
+    {
+      "title": "October",
+      "year": 2018,
+      "slug": "october-2018",
+      "url": "https://letterboxd.com/film/october-2018/",
+      "rating": 6
+    },
+    {
+      "title": "Zootopia 2",
+      "year": 2025,
+      "slug": "zootopia-2",
+      "url": "https://letterboxd.com/film/zootopia-2/",
+      "rating": 6
+    },
+    {
+      "title": "Me Before You",
+      "year": 2016,
+      "slug": "me-before-you",
+      "url": "https://letterboxd.com/film/me-before-you/",
+      "rating": 5
+    },
+    {
+      "title": "Now You See Me",
+      "year": 2013,
+      "slug": "now-you-see-me",
+      "url": "https://letterboxd.com/film/now-you-see-me/",
+      "rating": 5
+    },
+    {
+      "title": "Together",
+      "year": 2025,
+      "slug": "together-2025",
+      "url": "https://letterboxd.com/film/together-2025/",
+      "rating": 5
+    },
+    {
+      "title": "Captain America: Brave New World",
+      "year": 2025,
+      "slug": "captain-america-brave-new-world",
+      "url": "https://letterboxd.com/film/captain-america-brave-new-world/",
+      "rating": 4
+    },
+    {
+      "title": "Dil Toh Baccha Hai Ji",
+      "year": 2011,
+      "slug": "dil-toh-baccha-hai-ji",
+      "url": "https://letterboxd.com/film/dil-toh-baccha-hai-ji/",
+      "rating": 4
+    },
+    {
+      "title": "Legend",
+      "year": 2015,
+      "slug": "legend-2015",
+      "url": "https://letterboxd.com/film/legend-2015/",
+      "rating": 4
+    },
+    {
+      "title": "Coolie",
+      "year": 2025,
+      "slug": "coolie-2025",
+      "url": "https://letterboxd.com/film/coolie-2025/",
+      "rating": 3
+    },
+    {
+      "title": "Marco",
+      "year": 2024,
+      "slug": "marco-2024",
+      "url": "https://letterboxd.com/film/marco-2024/",
+      "rating": 3
+    },
+    {
+      "title": "Materialists",
+      "year": 2025,
+      "slug": "materialists",
+      "url": "https://letterboxd.com/film/materialists/",
+      "rating": 3
+    },
+    {
+      "title": "Blade Runner 2049",
+      "year": 2017,
+      "slug": "blade-runner-2049",
+      "url": "https://letterboxd.com/film/blade-runner-2049/",
+      "rating": null
+    },
+    {
+      "title": "Children of Men",
+      "year": 2006,
+      "slug": "children-of-men",
+      "url": "https://letterboxd.com/film/children-of-men/",
+      "rating": null
+    },
+    {
+      "title": "Everything Everywhere All at Once",
+      "year": 2022,
+      "slug": "everything-everywhere-all-at-once",
+      "url": "https://letterboxd.com/film/everything-everywhere-all-at-once/",
+      "rating": null
+    },
+    {
+      "title": "Get Out",
+      "year": 2017,
+      "slug": "get-out-2017",
+      "url": "https://letterboxd.com/film/get-out-2017/",
+      "rating": null
+    },
+    {
+      "title": "Her",
+      "year": 2013,
+      "slug": "her",
+      "url": "https://letterboxd.com/film/her/",
+      "rating": null
+    },
+    {
+      "title": "Kill Bill: The Whole Bloody Affair",
+      "year": 2004,
+      "slug": "kill-bill-the-whole-bloody-affair",
+      "url": "https://letterboxd.com/film/kill-bill-the-whole-bloody-affair/",
+      "rating": null
+    },
+    {
+      "title": "Mad Max: Fury Road",
+      "year": 2015,
+      "slug": "mad-max-fury-road",
+      "url": "https://letterboxd.com/film/mad-max-fury-road/",
+      "rating": null
+    },
+    {
+      "title": "Mickey 17",
+      "year": 2025,
+      "slug": "mickey-17",
+      "url": "https://letterboxd.com/film/mickey-17/",
+      "rating": null
+    },
+    {
+      "title": "Shutter Island",
+      "year": 2010,
+      "slug": "shutter-island",
+      "url": "https://letterboxd.com/film/shutter-island/",
+      "rating": null
+    },
+    {
+      "title": "Spider-Man: Into the Spider-Verse",
+      "year": 2018,
+      "slug": "spider-man-into-the-spider-verse",
+      "url": "https://letterboxd.com/film/spider-man-into-the-spider-verse/",
+      "rating": null
+    },
+    {
+      "title": "Spirited Away",
+      "year": 2001,
+      "slug": "spirited-away",
+      "url": "https://letterboxd.com/film/spirited-away/",
+      "rating": null
+    },
+    {
+      "title": "The Avengers",
+      "year": 2012,
+      "slug": "the-avengers-2012",
+      "url": "https://letterboxd.com/film/the-avengers-2012/",
+      "rating": null
+    },
+    {
+      "title": "The Dark Knight",
+      "year": 2008,
+      "slug": "the-dark-knight",
+      "url": "https://letterboxd.com/film/the-dark-knight/",
+      "rating": null
+    },
+    {
+      "title": "Your Name.",
+      "year": 2016,
+      "slug": "your-name",
+      "url": "https://letterboxd.com/film/your-name/",
+      "rating": null
+    }
+  ]
+}

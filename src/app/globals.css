@@ -78,7 +78,7 @@ body {
 .cursor-blink { animation: blink 1s steps(1) infinite; }
 
 @keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
-.marquee-track { animation: marquee 25s linear infinite; }
+.marquee-track { animation: marquee 50s linear infinite; }
 
 @keyframes wiggle {
   0%,100% { transform: rotate(-2deg); }

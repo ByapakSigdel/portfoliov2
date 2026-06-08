@@ -14,29 +14,73 @@ export function SnakeGame() {
   );
 }
 
-/* ---- the decorative snake (snake.png) wrapping the writing divider ---- */
-// content bbox measured from snake.png (1536x1024): x[138-1501] y[385-717]
-const RIB_H = 52; // tall enough that the body weaves above & below the line
+/* ---- a small coiled snake icon by the writing divider — click to play ---- */
+const ICON = 30;
+function drawSnakeIcon(cv: HTMLCanvasElement) {
+  cv.width = ICON;
+  cv.height = ICON;
+  const ctx = cv.getContext("2d")!;
+  ctx.clearRect(0, 0, ICON, ICON);
+  const cx = ICON / 2 - 1.5, cy = ICON / 2 + 1;
+  // a little spiral coil
+  const pts: { x: number; y: number }[] = [];
+  const turns = 1.55, steps = 48;
+  for (let i = 0; i <= steps; i++) {
+    const t = (i / steps) * turns * 2 * Math.PI;
+    const r = 2.4 + (i / steps) * 8.4;
+    pts.push({ x: cx + r * Math.cos(t), y: cy + r * Math.sin(t) });
+  }
+  ctx.lineJoin = "round";
+  ctx.lineCap = "round";
+  const stroke = (color: string, w: number) => {
+    ctx.beginPath();
+    ctx.moveTo(pts[0].x, pts[0].y);
+    for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i].x, pts[i].y);
+    ctx.strokeStyle = color;
+    ctx.lineWidth = w;
+    ctx.stroke();
+  };
+  const bw = 5.5;
+  stroke("#07090a", bw + 3); // brutalist outline
+  stroke("#4a8f3d", bw); // green body
+  stroke("#7cbf63", bw * 0.34); // dorsal stripe
+
+  // head at the outer end of the coil
+  const h = pts[pts.length - 1];
+  const p = pts[pts.length - 4];
+  const ang = Math.atan2(h.y - p.y, h.x - p.x);
+  ctx.beginPath(); ctx.arc(h.x, h.y, 4.3, 0, Math.PI * 2); ctx.fillStyle = "#5fa052"; ctx.fill();
+  ctx.lineWidth = 2; ctx.strokeStyle = "#07090a"; ctx.stroke();
+  const ex = h.x + Math.cos(ang) * 1.1, ey = h.y + Math.sin(ang) * 1.1;
+  ctx.beginPath(); ctx.arc(ex, ey, 1.5, 0, Math.PI * 2); ctx.fillStyle = "#fff"; ctx.fill();
+  ctx.beginPath(); ctx.arc(ex + Math.cos(ang) * 0.6, ey + Math.sin(ang) * 0.6, 0.8, 0, Math.PI * 2); ctx.fillStyle = "#07090a"; ctx.fill();
+  // tongue
+  ctx.strokeStyle = "#e0392f"; ctx.lineWidth = 1.4;
+  ctx.beginPath();
+  ctx.moveTo(h.x + Math.cos(ang) * 3.8, h.y + Math.sin(ang) * 3.8);
+  ctx.lineTo(h.x + Math.cos(ang) * 7, h.y + Math.sin(ang) * 7);
+  ctx.stroke();
+}
+
 function SnakeRibbon({ onPlay }: { onPlay: () => void }) {
-  const ref = useRef<HTMLDivElement>(null);
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const drawn = useRef(false);
 
   useEffect(() => {
     let raf = 0;
     const place = () => {
       const bar = document.querySelector("[data-snake-bar]");
-      const el = ref.current;
-      if (bar && el) {
+      const wrap = wrapRef.current;
+      const cv = canvasRef.current;
+      if (bar && wrap && cv) {
         const r = bar.getBoundingClientRect();
-        const W = r.width;
-        if (W < 20) { el.style.opacity = "0"; raf = requestAnimationFrame(place); return; }
-        el.style.opacity = "1";
-        el.style.width = `${W}px`;
-        el.style.height = `${RIB_H}px`;
-        // stretch the snake across the WHOLE divider, centred on the line so its
-        // body crosses over/under it; scaleX(-1) flips it to face right
-        el.style.transform = `translate(${r.left}px, ${r.top + 1.5 - RIB_H / 2}px) scaleX(-1)`;
-        el.style.backgroundSize = `${(1536 * W) / 1364}px ${(1024 * RIB_H) / 333}px`;
-        el.style.backgroundPosition = `${(-138 * W) / 1364}px ${(-385 * RIB_H) / 333}px`;
+        if (r.width < 12) { wrap.style.opacity = "0"; }
+        else {
+          wrap.style.opacity = "1";
+          wrap.style.transform = `translate(${Math.round(r.left + 3)}px, ${Math.round(r.top + 1.5 - ICON / 2)}px)`;
+          if (!drawn.current) { drawn.current = true; drawSnakeIcon(cv); }
+        }
       }
       raf = requestAnimationFrame(place);
     };
@@ -46,21 +90,13 @@ function SnakeRibbon({ onPlay }: { onPlay: () => void }) {
 
   return (
     <div
-      ref={ref}
+      ref={wrapRef}
       onClick={onPlay}
-      title="🐍 click to play snake!"
-      style={{
-        position: "fixed",
-        left: 0,
-        top: 0,
-        backgroundImage: "url(/sprites/snake.png)",
-        backgroundRepeat: "no-repeat",
-        imageRendering: "pixelated",
-        zIndex: 45,
-        cursor: "pointer",
-        pointerEvents: "auto",
-      }}
-    />
+      title="🐍 play snake!"
+      style={{ position: "fixed", left: 0, top: 0, width: ICON, height: ICON, zIndex: 45, cursor: "pointer", pointerEvents: "auto" }}
+    >
+      <canvas ref={canvasRef} style={{ display: "block" }} />
+    </div>
   );
 }
 
@@ -202,71 +238,59 @@ function SnakeOverlay({ onExit }: { onExit: () => void }) {
       updateCamera(false); // scroll the page to follow the snake
     };
 
-    const roundRect = (x: number, y: number, w: number, h: number, rad: number) => {
-      ctx.beginPath();
-      ctx.moveTo(x + rad, y);
-      ctx.arcTo(x + w, y, x + w, y + h, rad);
-      ctx.arcTo(x + w, y + h, x, y + h, rad);
-      ctx.arcTo(x, y + h, x, y, rad);
-      ctx.arcTo(x, y, x + w, y, rad);
-      ctx.closePath();
-    };
+    // ---- a clean, hand-drawn snake: one thick rounded path (no gaps, no seams),
+    // a brown body with a dorsal stripe + black outline, a head with eyes and a
+    // flicking tongue. Colours echo the snake.png ribbon. ----
+    const drawSnake = (ox: number, oy: number) => {
+      if (snake.length === 0) return;
+      const pts = snake.map((s) => ({ x: s.x * CELL + CELL / 2 - ox, y: s.y * CELL + CELL / 2 - oy }));
+      const bw = CELL * 0.82;
+      ctx.lineJoin = "round";
+      ctx.lineCap = "round";
+      const strokePath = (color: string, w: number) => {
+        ctx.beginPath();
+        ctx.moveTo(pts[0].x, pts[0].y);
+        for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i].x, pts[i].y);
+        ctx.strokeStyle = color;
+        ctx.lineWidth = w;
+        ctx.stroke();
+      };
+      strokePath("#1c0f07", bw + 4); // outline
+      strokePath("#7a3a18", bw); // body
+      strokePath("#a85e2c", bw * 0.34); // dorsal stripe
 
-    // ---- snake sprites (content bboxes measured from the PNGs); head.png faces
-    // LEFT, body is a horizontal strip, corner connects right+down, tail tip LEFT ----
-    type Tile = { img: HTMLImageElement; bb: { x: number; y: number; w: number; h: number } };
-    const mkImg = (src: string) => { const im = new Image(); im.src = src; return im; };
-    const SP: Record<string, Tile> = {
-      head: { img: mkImg("/sprites/snake-head.png"), bb: { x: 316, y: 332, w: 760, h: 392 } },
-      body: { img: mkImg("/sprites/snake-body.png"), bb: { x: 695, y: 426, w: 144, h: 144 } },
-      corner: { img: mkImg("/sprites/snake-corner.png"), bb: { x: 454, y: 427, w: 716, h: 236 } },
-      tail: { img: mkImg("/sprites/snake-tail.png"), bb: { x: 398, y: 390, w: 726, h: 249 } },
-    };
-    const spritesReady = () => Object.values(SP).every((s) => s.img.complete && s.img.naturalWidth > 0);
-    // direction between two adjacent cells, handling wall wrap
-    const segDir = (from: Pt, to: Pt): Pt => {
-      let dx = to.x - from.x; if (dx > 1) dx = -1; else if (dx < -1) dx = 1;
-      let dy = to.y - from.y; if (dy > 1) dy = -1; else if (dy < -1) dy = 1;
-      return { x: dx, y: dy };
-    };
-    // map a LEFT-facing tile so it points in direction d (flip for right, rotate for up/down)
-    const faceTransform = (d: Pt) => {
-      if (d.x === 1) return { rot: 0, fx: true };
-      if (d.y === -1) return { rot: 90, fx: false };
-      if (d.y === 1) return { rot: -90, fx: false };
-      return { rot: 0, fx: false }; // left
-    };
-    const drawTile = (s: Tile, cx: number, cy: number, rot: number, fx: boolean, fy: boolean) => {
-      ctx.save();
-      ctx.translate(cx, cy);
-      if (rot) ctx.rotate((rot * Math.PI) / 180);
-      if (fx || fy) ctx.scale(fx ? -1 : 1, fy ? -1 : 1);
-      ctx.imageSmoothingEnabled = false;
-      ctx.drawImage(s.img, s.bb.x, s.bb.y, s.bb.w, s.bb.h, -CELL / 2, -CELL / 2, CELL, CELL);
-      ctx.restore();
-    };
-    const drawSnakeSprites = (ox: number, oy: number) => {
-      for (let i = 0; i < snake.length; i++) {
-        const cx = snake[i].x * CELL + CELL / 2 - ox;
-        const cy = snake[i].y * CELL + CELL / 2 - oy;
-        if (i === 0) {
-          const d = snake.length > 1 ? segDir(snake[1], snake[0]) : dir;
-          const t = faceTransform(d);
-          drawTile(SP.head, cx, cy, t.rot, t.fx, false);
-        } else if (i === snake.length - 1) {
-          const d = segDir(snake[i - 1], snake[i]); // tip points away from the body
-          const t = faceTransform(d);
-          drawTile(SP.tail, cx, cy, t.rot, t.fx, false);
-        } else {
-          const a = segDir(snake[i], snake[i - 1]); // toward head
-          const b = segDir(snake[i], snake[i + 1]); // toward tail
-          if (a.x === -b.x && a.y === -b.y) {
-            drawTile(SP.body, cx, cy, a.x !== 0 ? 0 : 90, false, false);
-          } else {
-            // corner base connects right+down → flipX for left, flipY for up
-            drawTile(SP.corner, cx, cy, 0, a.x === -1 || b.x === -1, a.y === -1 || b.y === -1);
-          }
-        }
+      // head
+      const h = pts[0];
+      const d = snake.length > 1
+        ? { x: Math.sign(snake[0].x - snake[1].x), y: Math.sign(snake[0].y - snake[1].y) }
+        : dir;
+      ctx.beginPath();
+      ctx.arc(h.x, h.y, bw * 0.62, 0, Math.PI * 2);
+      ctx.fillStyle = "#8a4520";
+      ctx.fill();
+      ctx.lineWidth = 3;
+      ctx.strokeStyle = "#1c0f07";
+      ctx.stroke();
+      // eyes (perpendicular to travel, looking forward)
+      const px = -d.y, py = d.x;
+      const ecx = h.x + d.x * bw * 0.12, ecy = h.y + d.y * bw * 0.12;
+      const eo = bw * 0.3;
+      for (const sgn of [1, -1]) {
+        const ex = ecx + px * eo * sgn, ey = ecy + py * eo * sgn;
+        ctx.beginPath(); ctx.arc(ex, ey, CELL * 0.15, 0, Math.PI * 2); ctx.fillStyle = "#fff"; ctx.fill();
+        ctx.lineWidth = 1.5; ctx.strokeStyle = "#1c0f07"; ctx.stroke();
+        ctx.beginPath(); ctx.arc(ex + d.x * 1.6, ey + d.y * 1.6, CELL * 0.07, 0, Math.PI * 2); ctx.fillStyle = "#07090a"; ctx.fill();
+      }
+      // forked tongue, flicking
+      if (performance.now() % 1400 < 320) {
+        const mx = h.x + d.x * bw * 0.55, my = h.y + d.y * bw * 0.55;
+        const tx = mx + d.x * CELL * 0.42, ty = my + d.y * CELL * 0.42;
+        ctx.strokeStyle = "#e0392f"; ctx.lineWidth = 2.2;
+        ctx.beginPath(); ctx.moveTo(mx, my); ctx.lineTo(tx, ty); ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(tx, ty); ctx.lineTo(tx + px * CELL * 0.13 + d.x * CELL * 0.07, ty + py * CELL * 0.13 + d.y * CELL * 0.07);
+        ctx.moveTo(tx, ty); ctx.lineTo(tx - px * CELL * 0.13 + d.x * CELL * 0.07, ty - py * CELL * 0.13 + d.y * CELL * 0.07);
+        ctx.stroke();
       }
     };
 
@@ -299,21 +323,8 @@ function SnakeOverlay({ onExit }: { onExit: () => void }) {
       ctx.moveTo(fx, fy - CELL * 0.32);
       ctx.lineTo(fx + 3, fy - CELL * 0.5);
       ctx.stroke();
-      // snake — use the sprites once loaded, else a simple procedural fallback
-      if (spritesReady()) {
-        drawSnakeSprites(ox, oy);
-      } else {
-        for (let i = snake.length - 1; i >= 0; i--) {
-          const s = snake[i];
-          const x = s.x * CELL - ox, y = s.y * CELL - oy;
-          ctx.fillStyle = i === 0 ? "#5fa052" : "#4a8f3d";
-          roundRect(x + 1.5, y + 1.5, CELL - 3, CELL - 3, 5);
-          ctx.fill();
-          ctx.strokeStyle = "#07090a";
-          ctx.lineWidth = 2;
-          ctx.stroke();
-        }
-      }
+      // snake
+      drawSnake(ox, oy);
     };
 
     let raf = 0;

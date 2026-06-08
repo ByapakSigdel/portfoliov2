@@ -36,7 +36,6 @@ export function defaultState(): CanvasState {
 
   if (canRight) {
     add("headband", rightBand, 250, -6);
-    add("kunai", rightBand, 470, 9);
     add("ramen", rightBand, 770, -4);
     add("shuriken", rightBand, 1110, 12);
   }
@@ -48,7 +47,6 @@ export function defaultState(): CanvasState {
   // narrow desktop: tuck two into the top corners of the sky
   if (!canLeft && !canRight) {
     add("headband", Math.min(vw - 70, contentRight + 30), 240, -6);
-    add("kunai", Math.max(95, contentLeft + 30), 300, 9);
   }
   return { ...EMPTY_STATE, stamps };
 }
