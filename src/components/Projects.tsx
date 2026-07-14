@@ -16,6 +16,23 @@ const projects: {
   tags: string[];
 }[] = [
   {
+    title: "monoline",
+    short: "aesthetic drawing in your terminal — braille strokes, shape snap, palettes, symmetry.",
+    long: "A terminal canvas for freehand drawing with live stroke smoothing, Ctrl-drag shape correction (line / circle / ellipse / rect), curated palettes, symmetry modes, dot grid, and reveal animations. Install with pip and draw with a mouse in any TTY.",
+    status: "active",
+    github: "https://github.com/ByapakSigdel/monoline",
+    tags: ["python", "terminal", "cli"],
+  },
+  {
+    title: "LinkUp",
+    short: "couples-focused social app — a private sky for two, not another group chat.",
+    long: "A Turbo monorepo for a couples social platform: Next.js web, mobile client, and Node API with Postgres/Redis. Shared moments become a living star map — chat, memories, and rituals built only for two. Live at linkup.mahansigdel.com.np.",
+    status: "active",
+    github: "https://github.com/ByapakSigdel/linkup",
+    web: "https://linkup.mahansigdel.com.np",
+    tags: ["next.js", "typescript", "postgres"],
+  },
+  {
     title: "Derivative",
     short: "block coding platform for arduino & embedded systems.",
     long: "A visual block-based programming platform that lets users build Arduino and embedded systems projects without writing code. Drag-and-drop blocks generate real C/C++ that compiles and uploads to hardware.",
@@ -30,6 +47,22 @@ const projects: {
     status: "active",
     github: "https://github.com/ByapakSigdel/derivative-cli",
     tags: ["go", "docker", "arduino"],
+  },
+  {
+    title: "scratch",
+    short: "dj-turntable scratch / scrub engine in raw c.",
+    long: "Portable vinyl-style scrub engine in pure C — variable-rate bidirectional resampling so a jog wheel (or on-screen platter) pitches, reverses, freezes, and glides back to play. Hardware-agnostic core plus a Python testbench for demos.",
+    status: "completed",
+    github: "https://github.com/ByapakSigdel/scratch",
+    tags: ["c", "audio", "embedded"],
+  },
+  {
+    title: "nepali-tts",
+    short: "offline multi-speaker nepali text-to-speech (vits / onnx).",
+    long: "Full pipeline for training a multi-speaker Nepali (Devanagari) TTS model with piper/VITS on OpenSLR data, exportable to ONNX for fully offline inference — scripts, configs, and reproduction notes included.",
+    status: "active",
+    github: "https://github.com/ByapakSigdel/nepali-tts",
+    tags: ["python", "ml", "tts"],
   },
   {
     title: "TithiMiti",
@@ -48,12 +81,12 @@ const projects: {
     tags: ["python", "linux", "hyprland"],
   },
   {
-    title: "Virtual Mouse",
-    short: "control your mouse with hand gestures via opencv + mediapipe.",
-    long: "Python-based application using OpenCV and MediaPipe to track hand movements and translate them into mouse controls for hands-free computer interaction.",
-    status: "archived",
-    github: "https://github.com/ByapakSigdel/Virtual-Mouse",
-    tags: ["python", "opencv", "mediapipe"],
+    title: "nats-server",
+    short: "oss contribution — healthz ignores expired jwt accounts.",
+    long: "Upstream contribution to NATS.io's high-performance messaging server: skip expired JWT accounts during JetStream healthz scans so monitor endpoints stay green in clustered deployments with stale account credentials.",
+    status: "completed",
+    github: "https://github.com/nats-io/nats-server/pull/8379",
+    tags: ["go", "nats", "oss"],
   },
   {
     title: "E-commerce Builder",
@@ -62,29 +95,6 @@ const projects: {
     status: "completed",
     web: "https://shopatbanau.com",
     tags: ["next.js", "stripe", "saas"],
-  },
-  {
-    title: "NexOS",
-    short: "lightweight linux-based custom os for optimized performance.",
-    long: "A custom-built Linux-based OS focused on optimized communication and efficient memory management, developed during our minor project.",
-    status: "archived",
-    tags: ["linux", "os", "c"],
-  },
-  {
-    title: "WEB3 Blog Dapp",
-    short: "decentralized blogging on the solana blockchain.",
-    long: "A DApp enabling users to publish and read blogs stored on Solana, using React.js for the frontend with wallet authentication and smart contracts.",
-    status: "archived",
-    github: "https://github.com/ByapakSigdel/Web3-Dapp",
-    tags: ["solana", "react", "web3"],
-  },
-  {
-    title: "Automatic PetFeeder",
-    short: "iot device to automate pet feeding schedules.",
-    long: "Arduino-based IoT project — schedule feeding times, monitor via sensors, and control dispensing remotely through a connected app.",
-    status: "completed",
-    github: "https://github.com/ByapakSigdel/Pet-feeder",
-    tags: ["arduino", "iot", "embedded"],
   },
 ];
 

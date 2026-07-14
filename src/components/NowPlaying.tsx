@@ -10,7 +10,7 @@ type Item = {
 };
 
 const items: Item[] = [
-  { id: "building", icon: "💻", label: "building", value: "derivative — block coding for arduino", bg: "#5fa052" },
+  { id: "building", icon: "💻", label: "building", value: "monoline — terminal braille drawing", bg: "#5fa052" },
   { id: "reading", icon: "📖", label: "reading", value: "the pragmatic programmer", bg: "#e08043" },
   { id: "listening", icon: "🎧", label: "listening", value: "lofi + city pop on loop", bg: "#e8a87c" },
   { id: "based", icon: "📍", label: "based in", value: "kathmandu, nepal", bg: "#fffaf0" },
